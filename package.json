@@ -1,6 +1,6 @@
 {
   "name": "@doscientos/configs",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": false,
   "description": "Fast, strict, and reusable engineering standards for Doscientos projects.",
   "license": "MIT",
