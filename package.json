@@ -1,0 +1,92 @@
+{
+  "name": "@doscientos/configs",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Fast, strict, and reusable engineering standards for Doscientos projects.",
+  "license": "MIT",
+  "author": "Doscientos <dev@doscientos.es>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/doscientos-es/configs.git"
+  },
+  "homepage": "https://github.com/doscientos-es/configs#readme",
+  "bugs": {
+    "url": "https://github.com/doscientos-es/configs/issues"
+  },
+  "bin": {
+    "doscientos-structure": "./structure/check-structure.mjs"
+  },
+  "files": [
+    "*.d.ts",
+    "*.js",
+    "*.json",
+    "structure",
+    "tsconfig",
+    "README.md"
+  ],
+  "type": "module",
+  "exports": {
+    "./architecture": {
+      "types": "./feature-layers.d.ts",
+      "import": "./feature-layers.js"
+    },
+    "./oxfmt": "./oxfmt.json",
+    "./oxlint/base": {
+      "types": "./base.d.ts",
+      "import": "./base.js"
+    },
+    "./oxlint/node": {
+      "types": "./node.d.ts",
+      "import": "./node.js"
+    },
+    "./oxlint/react-vite": {
+      "types": "./react-vite.d.ts",
+      "import": "./react-vite.js"
+    },
+    "./oxlint/typescript": {
+      "types": "./typescript.d.ts",
+      "import": "./typescript.js"
+    },
+    "./oxlint/typescript-strict": {
+      "types": "./typescript-strict.d.ts",
+      "import": "./typescript-strict.js"
+    },
+    "./structure": "./structure/check-structure.mjs",
+    "./tsconfig/base": "./tsconfig/base.json",
+    "./tsconfig/strict": "./tsconfig/strict.json",
+    "./vitest": {
+      "types": "./vitest.d.ts",
+      "import": "./vitest.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "check": "node --test test/config.test.mjs",
+    "prepublishOnly": "npm run check",
+    "version:major": "npm version major --no-git-tag-version",
+    "version:minor": "npm version minor --no-git-tag-version",
+    "version:patch": "npm version patch --no-git-tag-version"
+  },
+  "peerDependencies": {
+    "oxlint": ">=1.75.0 <2",
+    "oxlint-tsgolint": ">=7.0.2001",
+    "vitest": ">=4.0.0 <5"
+  },
+  "peerDependenciesMeta": {
+    "oxlint": {
+      "optional": true
+    },
+    "oxlint-tsgolint": {
+      "optional": true
+    },
+    "vitest": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "packageManager": "pnpm@9.15.2"
+}
