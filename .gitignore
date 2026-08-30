@@ -8,6 +8,7 @@ coverage/
 dist/
 .turbo/
 *.tgz
+*.tsbuildinfo
 
 # Local configuration and logs
 .env
