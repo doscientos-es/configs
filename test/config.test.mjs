@@ -14,7 +14,22 @@ test('base policy keeps high-signal safety rules enabled', () => {
   assert.equal(baseConfig.rules['no-debugger'], 'error')
   assert.equal(baseConfig.rules['import/no-cycle'], 'error')
   assert.equal(baseConfig.rules.eqeqeq[2].null, 'ignore')
-  assert.ok(baseConfig.ignorePatterns.includes('node_modules/**'))
+  for (const pattern of [
+    '.agent/**',
+    '.agents/**',
+    '.claude/**',
+    '.codex/**',
+    '.continue/**',
+    '.cursor/**',
+    '.gemini/**',
+    '.opencode/**',
+    '.pi/**',
+    '.roo/**',
+    '.windsurf/**',
+    'node_modules/**',
+  ]) {
+    assert.ok(baseConfig.ignorePatterns.includes(pattern))
+  }
 })
 
 test('framework profiles compose their intended foundations', () => {

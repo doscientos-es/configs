@@ -3,6 +3,17 @@
  */
 export const baseConfig = {
   ignorePatterns: [
+    '.agent/**',
+    '.agents/**',
+    '.claude/**',
+    '.codex/**',
+    '.continue/**',
+    '.cursor/**',
+    '.gemini/**',
+    '.opencode/**',
+    '.pi/**',
+    '.roo/**',
+    '.windsurf/**',
     'node_modules/**',
     'dist/**',
     'coverage/**',
