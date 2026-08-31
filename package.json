@@ -3,15 +3,15 @@
   "version": "0.1.5",
   "private": false,
   "description": "Fast, strict, and reusable engineering standards for Doscientos projects.",
+  "homepage": "https://github.com/doscientos-es/configs#readme",
+  "bugs": {
+    "url": "https://github.com/doscientos-es/configs/issues"
+  },
   "license": "MIT",
   "author": "Doscientos <dev@doscientos.es>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/doscientos-es/configs.git"
-  },
-  "homepage": "https://github.com/doscientos-es/configs#readme",
-  "bugs": {
-    "url": "https://github.com/doscientos-es/configs/issues"
+    "url": "git+https://github.com/doscientos-es/configs.git"
   },
   "bin": {
     "doscientos-structure": "./structure/check-structure.mjs"
@@ -30,6 +30,10 @@
       "types": "./feature-layers.d.ts",
       "import": "./feature-layers.js"
     },
+    "./oxlint/astro": {
+      "types": "./astro.d.ts",
+      "import": "./astro.js"
+    },
     "./oxfmt": "./oxfmt.json",
     "./oxlint/base": {
       "types": "./base.d.ts",
@@ -42,6 +46,14 @@
     "./oxlint/react-vite": {
       "types": "./react-vite.d.ts",
       "import": "./react-vite.js"
+    },
+    "./oxlint/react": {
+      "types": "./react.d.ts",
+      "import": "./react.js"
+    },
+    "./oxlint/react-next": {
+      "types": "./react-next.d.ts",
+      "import": "./react-next.js"
     },
     "./oxlint/typescript": {
       "types": "./typescript.d.ts",
@@ -64,11 +76,21 @@
   },
   "scripts": {
     "check": "node --test test/config.test.mjs",
+    "format": "oxfmt -c oxfmt.json --write .",
+    "format:check": "oxfmt -c oxfmt.json --check .",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix --fix-suggestions",
     "prepublishOnly": "npm run check",
+    "quality": "pnpm format:check && pnpm lint && pnpm check",
     "release:check": "pnpm run check && npm pack --dry-run",
     "version:major": "npm version major --no-git-tag-version",
     "version:minor": "npm version minor --no-git-tag-version",
     "version:patch": "npm version patch --no-git-tag-version"
+  },
+  "devDependencies": {
+    "oxfmt": "^0.65.0",
+    "oxlint": "^1.75.0",
+    "oxlint-tsgolint": "^7.0.2001"
   },
   "peerDependencies": {
     "oxlint": ">=1.75.0 <2",

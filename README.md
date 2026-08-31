@@ -15,7 +15,10 @@ natively; no JavaScript ESLint plugins are required.
   applications that validate external data at their boundaries.
 - `@doscientos/configs/oxlint/typescript-strict`: adds `no-unsafe-*` rules for
   fully typed domain libraries.
-- `@doscientos/configs/oxlint/react-vite`: React, hooks and accessibility rules.
+- `@doscientos/configs/oxlint/react`: React libraries and generic browser apps.
+- `@doscientos/configs/oxlint/react-vite`: React/Vite with Fast Refresh rules.
+- `@doscientos/configs/oxlint/react-next`: React/Next with non-blocking Next guidance.
+- `@doscientos/configs/oxlint/astro`: Astro plus TypeScript rules.
 - `@doscientos/configs/oxlint/node`: server and script profile; permits logging.
 - `@doscientos/configs/architecture`: feature-layer import boundaries.
 

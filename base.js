@@ -2,12 +2,20 @@
  * High-signal JavaScript policy. Framework-specific profiles extend this object.
  */
 export const baseConfig = {
+  ignorePatterns: [
+    'node_modules/**',
+    'dist/**',
+    'coverage/**',
+    '.next/**',
+    '.astro/**',
+    'storybook-static/**',
+  ],
   plugins: ['import', 'oxc'],
   options: {
     reportUnusedDisableDirectives: 'error',
   },
   rules: {
-    eqeqeq: ['error', 'always'],
+    eqeqeq: ['error', 'always', { null: 'ignore' }],
     'import/no-cycle': 'error',
     'no-console': 'error',
     'no-debugger': 'error',
