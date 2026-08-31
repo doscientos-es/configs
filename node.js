@@ -7,6 +7,6 @@ export const nodeConfig = {
     node: true,
   },
   rules: {
-    'no-console': 'off'
+    'no-console': 'off',
   },
 }
