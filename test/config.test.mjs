@@ -1,4 +1,8 @@
 import assert from 'node:assert/strict'
+import { execFileSync } from 'node:child_process'
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
 import test from 'node:test'
 
 import { astroConfig } from '../astro.js'
@@ -49,4 +53,22 @@ test('Vitest factory provides strict and overrideable coverage thresholds', () =
 test('feature profile protects feature internals', () => {
   const config = createFeatureLayersConfig()
   assert.equal(config.rules['no-restricted-imports'][0], 'error')
+})
+
+test('structure checker supports TanStack file-based route adapters explicitly', () => {
+  const fixture = mkdtempSync(join(tmpdir(), 'doscientos-structure-'))
+  const sourceRoot = join(fixture, 'src')
+
+  try {
+    mkdirSync(join(sourceRoot, 'routes'), { recursive: true })
+    mkdirSync(join(sourceRoot, 'features', 'crm', 'ui'), { recursive: true })
+    writeFileSync(join(sourceRoot, 'routeTree.gen.ts'), 'export {}')
+    writeFileSync(join(sourceRoot, 'routes', '__root.tsx'), 'export {}')
+    writeFileSync(join(sourceRoot, 'routes', 'contactos.$id.tsx'), 'export {}')
+    writeFileSync(join(sourceRoot, 'features', 'crm', 'ui', 'crm-page.tsx'), 'export {}')
+
+    execFileSync(process.execPath, [join(import.meta.dirname, '../structure/check-structure.mjs'), '--root', sourceRoot, '--tanstack-router'])
+  } finally {
+    rmSync(fixture, { force: true, recursive: true })
+  }
 })

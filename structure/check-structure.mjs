@@ -6,6 +6,7 @@ import { relative, resolve, sep } from 'node:path'
 const args = process.argv.slice(2)
 const rootFlag = args.indexOf('--root')
 const root = resolve(process.cwd(), rootFlag === -1 ? 'src' : (args[rootFlag + 1] ?? 'src'))
+const usesTanstackRouter = args.includes('--tanstack-router')
 const ignoredDirectories = new Set([
   '.git',
   '.next',
@@ -16,8 +17,20 @@ const ignoredDirectories = new Set([
   'docs',
   'node_modules',
 ])
-const defaultTopLevel = new Set(['app', 'features', 'pages', 'shared'])
-const conventionalFiles = new Set(['App.css', 'App.tsx', 'main.tsx', 'vite-env.d.ts'])
+const defaultTopLevel = new Set([
+  'app',
+  'features',
+  'pages',
+  'shared',
+  ...(usesTanstackRouter ? ['routes'] : []),
+])
+const conventionalFiles = new Set([
+  'App.css',
+  'App.tsx',
+  'main.tsx',
+  'vite-env.d.ts',
+  ...(usesTanstackRouter ? ['routeTree.gen.ts'] : []),
+])
 const failures = []
 
 if (!existsSync(root)) {
@@ -50,7 +63,8 @@ function inspect(directory) {
       continue
     }
 
-    if (!isConventionalFile(entry)) {
+    const isTanstackRoute = usesTanstackRouter && relative(root, directory).split(sep)[0] === 'routes'
+    if (!isTanstackRoute && !isConventionalFile(entry)) {
       failures.push(`${displayPath}: file names must use kebab-case and standard suffixes`)
     }
   }
